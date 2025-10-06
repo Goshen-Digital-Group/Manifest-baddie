@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroImage from "@/assets/manifesting-banner.png";
-import gallery1 from "@/assets/manifesting-baddie-1.png";
-import gallery2 from "@/assets/manifesting-baddie-2.png";
-import gallery3 from "@/assets/manifesting-baddie-3.png";
-import gallery4 from "@/assets/manifesting-baddie-4.png";
-import gallery5 from "@/assets/manifesting-baddie-5.png";
-import gallery6 from "@/assets/manifesting-baddie-6.png";
-import gallery7 from "@/assets/manifesting-baddie-7.png";
-import gallery8 from "@/assets/manifesting-baddie-8.png";
-import gallery9 from "@/assets/manifesting-baddie-9.png";
-import gallery10 from "@/assets/manifesting-baddie-11.png";
+import gallery1 from "@/assets/new-baddie/NEWBADDIES/BD-1.png";
+import gallery2 from "@/assets/new-baddie/NEWBADDIES/BD-2.png";
+import gallery3 from "@/assets/new-baddie/NEWBADDIES/BD-3.png";
+import gallery4 from "@/assets/new-baddie/NEWBADDIES/BD-4.png";
+import gallery5 from "@/assets/new-baddie/NEWBADDIES/BD-5.png";
+import gallery6 from "@/assets/new-baddie/NEWBADDIES/BD-6.png";
+import gallery7 from "@/assets/new-baddie/NEWBADDIES/BD-7.png";
+import gallery8 from "@/assets/new-baddie/NEWBADDIES/BD-8.png";
+import gallery9 from "@/assets/new-baddie/NEWBADDIES/BD-9.png";
+import gallery10 from "@/assets/new-baddie/NEWBADDIES/BD-10.png";
 import gallery11 from "@/assets/manifesting-baddie-12.png";
 import gallery12 from "@/assets/manifesting-baddie-14.png";
 
