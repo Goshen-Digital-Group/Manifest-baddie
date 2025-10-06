@@ -1,19 +1,65 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import heroImage from "@/assets/hero-baddie.jpg";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
+import heroImage from "@/assets/manifesting-banner.png";
+import gallery1 from "@/assets/manifesting-baddie-1.png";
+import gallery2 from "@/assets/manifesting-baddie-2.png";
+import gallery3 from "@/assets/manifesting-baddie-3.png";
+import gallery4 from "@/assets/manifesting-baddie-4.png";
+import gallery5 from "@/assets/manifesting-baddie-5.png";
+import gallery6 from "@/assets/manifesting-baddie-6.png";
+import gallery7 from "@/assets/manifesting-baddie-7.png";
+import gallery8 from "@/assets/manifesting-baddie-8.png";
+import gallery9 from "@/assets/manifesting-baddie-9.png";
+import gallery10 from "@/assets/manifesting-baddie-11.png";
+import gallery11 from "@/assets/manifesting-baddie-12.png";
+import gallery12 from "@/assets/manifesting-baddie-14.png";
+
 import { Twitter, Send, TrendingUp, Globe } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Index = () => {
+  // ✅ Fixed: Now includes all 6 images
   const galleryItems = [
-    { image: gallery1, tagline: "HODL her energy" },
-    { image: gallery2, tagline: "She's bullish on you" },
-    { image: gallery3, tagline: "Wifey material, decentralized" },
-    { image: gallery4, tagline: "Not financial advice, just fine AF" },
+    { image: gallery1, },
+    { image: gallery2  },
+    { image: gallery3 },
+    { image: gallery4 },
+    { image: gallery5 },
+    { image: gallery6 },
+       { image: gallery7 },
+    { image: gallery8 },
+       { image: gallery9 },
+              { image: gallery10 },
+                     { image: gallery11 },
+                       { image: gallery12},
+                     
+
+ 
   ];
+
+  // State for token profiles
+  const [tokenProfiles, setTokenProfiles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  // ⚠️ This will likely fail in browser due to CORS
+  useEffect(() => {
+    const fetchTokenProfiles = async () => {
+      try {
+        const res = await fetch("https://api.dexscreener.com/token-profiles/latest/v1");
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        setTokenProfiles(data?.pairs?.slice(0, 5) || []); // DexScreener returns { pairs: [...] }
+      } catch (err) {
+        console.error("DexScreener API error:", err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTokenProfiles();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-hero">
@@ -31,7 +77,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-black mb-20 bg-gradient-vaporwave bg-clip-text text-transparent bg-[length:200%_auto] animate-glow-pulse">
+          <h1 className="text-6xl text-white md:text-8xl font-black mb-20 bg-gradient-vaporwave bg-clip-text text-transparent bg-[length:200%_auto] animate-glow-pulse">
             Manifesting Asian Girls in Crypto
           </h1>
           <p className="text-2xl md:text-3xl mb-8 text-foreground/90 font-medium">
@@ -72,6 +118,7 @@ const Index = () => {
                   />
                 </div>
                 <div className="p-4 text-center">
+                       <p className="text-3xl font-bold text-primary">{item.title}</p>
                   <p className="text-lg font-bold text-primary">{item.tagline}</p>
                 </div>
               </Card>
@@ -80,11 +127,41 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Price Carousel (DexScreener API Attempt)
+      <section className="py-6 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-2xl font-bold text-center mb-4 text-primary">Live from DexScreener</h3>
+          {loading ? (
+            <p className="text-center text-muted-foreground">Loading latest tokens...</p>
+          ) : error ? (
+            <Card className="bg-background/50 p-4 border border-primary/30">
+              <p className="text-center text-muted-foreground">
+                🔒 Live prices unavailable in browser. Use DexScreener widget or backend proxy.
+              </p>
+            </Card>
+          ) : tokenProfiles.length > 0 ? (
+            <div className="flex overflow-x-auto gap-4 pb-4">
+              {tokenProfiles.map((pair: any, i) => (
+                <Card key={i} className="flex-shrink-0 w-48 p-3 bg-card border border-primary/20">
+                  <p className="font-bold text-sm truncate">{pair.baseToken?.name || "Token"}</p>
+                  <p className="text-primary font-black">{pair.priceUsd || "—"} USD</p>
+                  <p className="text-xs text-muted-foreground">
+                    {pair?.chainId?.toUpperCase?.() || "CHAIN"}
+                  </p>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground">No data available.</p>
+          )}
+        </div>
+      </section> */}
+
       {/* About $BADDIE Section */}
       <section className="py-20 px-4 bg-card/30">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-5xl md:text-6xl font-black text-center mb-8 bg-gradient-vaporwave bg-clip-text text-transparent">
-          $BADDIE TOKEN
+            $BADDIE TOKEN
           </h2>
           <Card className="bg-gradient-card border-primary/30 p-8 shadow-glow-purple">
             <p className="text-xl text-center mb-12 text-foreground/90 leading-relaxed">
@@ -126,7 +203,7 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-black mb-12 bg-gradient-vaporwave bg-clip-text text-transparent">
-          Join The Community
+            Join The Community
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             <Button
@@ -172,7 +249,6 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-12 px-4 border-t border-primary/20 bg-card/20">
         <div className="max-w-4xl mx-auto text-center">
-  
           <p className="text-sm text-muted-foreground">
             © 2025 Manifesting Asian Girls in Crypto
           </p>   
