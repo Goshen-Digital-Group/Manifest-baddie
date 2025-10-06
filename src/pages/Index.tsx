@@ -88,7 +88,7 @@ const Index = () => {
               BUY $BADDIE
             </Button>
             <Button variant="baddie" size="lg" className="text-lg px-8 py-6">
-              JOIN THE CULT
+              JOIN THE BADDIE
             </Button>
           </div>
         </div>
