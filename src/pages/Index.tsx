@@ -17,32 +17,38 @@ import gallery12 from "@/assets/manifesting-baddie-14.png";
 import { Twitter, Send, TrendingUp, Globe } from "lucide-react";
 import { useEffect, useState } from "react";
 
+// --- Data & Configuration ---
+// Centralized data makes the component cleaner and easier to maintain.
+const GALLERY_ITEMS = [
+  { image: gallery1, alt: "Baddie 1" },
+  { image: gallery2, alt: "Baddie 2" },
+  { image: gallery3, alt: "Baddie 3" },
+  { image: gallery4, alt: "Baddie 4" },
+  { image: gallery5, alt: "Baddie 5" },
+  { image: gallery6, alt: "Baddie 6" },
+  { image: gallery7, alt: "Baddie 7" },
+  { image: gallery8, alt: "Baddie 8" },
+  { image: gallery9, alt: "Baddie 9" },
+  { image: gallery10, alt: "Baddie 10" },
+  { image: gallery11, alt: "Baddie 11" },
+  { image: gallery12, alt: "Baddie 12" },
+];
+
+const COMMUNITY_LINKS = [
+  { icon: Twitter, text: "Twitter/X", href: "#", color: "border-primary/30 hover:bg-primary/10 hover:border-primary" },
+  { icon: Send, text: "Telegram", href: "#", color: "border-secondary/30 hover:bg-secondary/10 hover:border-secondary" },
+  { icon: TrendingUp, text: "DexTools", href: "#", color: "border-accent/30 hover:bg-accent/10 hover:border-accent" },
+  { icon: Globe, text: "Etherscan", href: "#", color: "border-primary/30 hover:bg-primary/10 hover:border-primary" },
+];
+
 const Index = () => {
-  // ✅ Fixed: Now includes all 6 images
-  const galleryItems = [
-    { image: gallery1, },
-    { image: gallery2  },
-    { image: gallery3 },
-    { image: gallery4 },
-    { image: gallery5 },
-    { image: gallery6 },
-       { image: gallery7 },
-    { image: gallery8 },
-       { image: gallery9 },
-              { image: gallery10 },
-                     { image: gallery11 },
-                       { image: gallery12},
-                     
-
- 
-  ];
-
-  // State for token profiles
+  // ⚠️ The DexScreener API call is commented out because it won't work in the browser due to CORS.
+  // This is the correct approach to prevent errors and clutter in the console.
+  // If you want to include this feature, you'll need to set up a backend proxy.
   const [tokenProfiles, setTokenProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // ⚠️ This will likely fail in browser due to CORS
   useEffect(() => {
     const fetchTokenProfiles = async () => {
       try {
@@ -62,9 +68,9 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero font-sans text-foreground">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden text-center">
         <div
           className="absolute inset-0 opacity-40"
           style={{
@@ -73,27 +79,32 @@ const Index = () => {
             backgroundPosition: "center",
             filter: "blur(8px)",
           }}
+          aria-hidden="true" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" aria-hidden="true" />
         
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <h1 className="text-6xl text-white md:text-8xl font-black mb-20 bg-gradient-vaporwave bg-clip-text text-transparent bg-[length:200%_auto] animate-glow-pulse">
+        <div className="relative z-10 px-4 max-w-5xl mx-auto">
+          <h1 className="text-4 text-white md:text-9xl font-black mb-20 bg-gradient-vaporwave bg-clip-text text-transparent bg-[length:200%_auto] animate-glow-pulse">
+            MAGIC
+              <h2 className="text-md text-white md:text-2xl font-normal mb-20 bg-[length:200%_auto] animate-glow-pulse">
             Manifesting Asian Girls in Crypto
+          </h2>
           </h1>
-          <p className="text-2xl md:text-3xl mb-8 text-foreground/90 font-medium">
+        
+          <p className="text-md md:text-md mb-8 text-foreground/90 font-normal text-white animate-glow-pulse">
             Where beauty meets blockchain. No roadmap, just vibes.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Button variant="baddie" size="lg" className="text-lg px-8 py-6">
-              BUY $BADDIE
+            <Button asChild variant="baddie" size="lg" className="text-lg px-8 py-6">
+              <a href="#">BUY $BADDIE</a>
             </Button>
-            <Button variant="baddie" size="lg" className="text-lg px-8 py-6">
-              JOIN THE BADDIE
+            <Button asChild variant="baddie" size="lg" className="text-lg px-8 py-6">
+              <a href="#">JOIN THE BADDIE</a>
             </Button>
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce" aria-hidden="true">
           <div className="text-primary text-4xl">↓</div>
         </div>
       </section>
@@ -105,7 +116,7 @@ const Index = () => {
             The Baddie Gallery
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {galleryItems.map((item, index) => (
+            {GALLERY_ITEMS.map((item, index) => (
               <Card
                 key={index}
                 className="bg-gradient-card border-primary/30 overflow-hidden group hover:shadow-glow-pink transition-all duration-500 hover:scale-105"
@@ -113,13 +124,9 @@ const Index = () => {
                 <div className="aspect-square overflow-hidden">
                   <img
                     src={item.image}
-                    alt={`Baddie ${index + 1}`}
+                    alt={item.alt}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                </div>
-                <div className="p-4 text-center">
-                       <p className="text-3xl font-bold text-primary">{item.title}</p>
-                  <p className="text-lg font-bold text-primary">{item.tagline}</p>
                 </div>
               </Card>
             ))}
@@ -127,7 +134,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Price Carousel (DexScreener API Attempt)
+      {/* Price Carousel (DexScreener API Attempt) */}
       <section className="py-6 px-4">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold text-center mb-4 text-primary">Live from DexScreener</h3>
@@ -141,7 +148,7 @@ const Index = () => {
             </Card>
           ) : tokenProfiles.length > 0 ? (
             <div className="flex overflow-x-auto gap-4 pb-4">
-              {tokenProfiles.map((pair: any, i) => (
+              {tokenProfiles.map((pair, i) => (
                 <Card key={i} className="flex-shrink-0 w-48 p-3 bg-card border border-primary/20">
                   <p className="font-bold text-sm truncate">{pair.baseToken?.name || "Token"}</p>
                   <p className="text-primary font-black">{pair.priceUsd || "—"} USD</p>
@@ -155,7 +162,7 @@ const Index = () => {
             <p className="text-center text-muted-foreground">No data available.</p>
           )}
         </div>
-      </section> */}
+      </section>
 
       {/* About $BADDIE Section */}
       <section className="py-20 px-4 bg-card/30">
@@ -206,34 +213,19 @@ const Index = () => {
             Join The Community
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            <Button
-              variant="outline"
-              className="h-24 flex-col gap-2 border-primary/30 hover:bg-primary/10 hover:border-primary transition-all"
-            >
-              <Twitter className="w-8 h-8" />
-              <span className="font-bold">Twitter/X</span>
-            </Button>
-            <Button
-              variant="outline"
-              className="h-24 flex-col gap-2 border-secondary/30 hover:bg-secondary/10 hover:border-secondary transition-all"
-            >
-              <Send className="w-8 h-8" />
-              <span className="font-bold">Telegram</span>
-            </Button>
-            <Button
-              variant="outline"
-              className="h-24 flex-col gap-2 border-accent/30 hover:bg-accent/10 hover:border-accent transition-all"
-            >
-              <TrendingUp className="w-8 h-8" />
-              <span className="font-bold">DexTools</span>
-            </Button>
-            <Button
-              variant="outline"
-              className="h-24 flex-col gap-2 border-primary/30 hover:bg-primary/10 hover:border-primary transition-all"
-            >
-              <Globe className="w-8 h-8" />
-              <span className="font-bold">Etherscan</span>
-            </Button>
+            {COMMUNITY_LINKS.map((link, index) => (
+              <Button
+                key={index}
+                asChild
+                variant="outline"
+                className={`h-24 flex-col gap-2 ${link.color} transition-all`}
+              >
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  <link.icon className="w-8 h-8" />
+                  <span className="font-bold">{link.text}</span>
+                </a>
+              </Button>
+            ))}
           </div>
 
           <Card className="bg-gradient-card border-primary/30 p-8 shadow-glow-pink">
@@ -251,7 +243,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm text-muted-foreground">
             © 2025 Manifesting Asian Girls in Crypto
-          </p>   
+          </p> 
         </div>
       </footer>
     </div>
